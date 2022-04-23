@@ -4,54 +4,36 @@
                 layout:decorate="template1">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Forme Patients</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
 <body>
-        <div layout:fragment="content1">
-            <div class="container mt-2">
-                <div class="card">
-                    <div class="card-header text-center">Liste des patients</div>
-                        <div class="card-body text-center">
-                            <div class="text-center">
-                                <form method="get" th:action="@{index}">
-                                    <label class="h5">Keyword</label>
-                                    <input type="text" name="keyword" th:value="${keyword}">
-                                    <button type="submit" class="btn btn-primary">Chercher</button>
-                                </form>
-                            </div>
-                            <table class="table">
-                                <thead class="text-center">
-                                <tr>
-                                    <th>Id</th><th>Nom</th><th>Date Naissance</th><th>Malade</th><th>Score</th><th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="p:${listPatients}">
-                                    <td th:text="${p.getId()}"></td>
-                                    <td th:text="${p.getNom()}"></td>
-                                    <td th:text="${p.getDateNaissance()}"></td>
-                                    <td th:text="${p.malade}"></td>
-                                    <td th:text="${p.getScore()}"></td>
-                                    <td>
-                                        <a onclick="return confirm('Etes vous sure ?')" class="btn btn-danger" th:href="@{delete(id=${p.id},keyword=${keyword},page=${currentPage})}">
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <ul class="nav nav-pills">
-                                <li th:each="pages,status:${pages}">
-                                    <a th:class="${status.index==currentPage?'btn btn-secondary ms-2 mt-2':'btn btn-outline-secondary ms-2 mt-2'}"
-                                       th:text="${status.index}"
-                                       th:href="@{index(page=${status.index},keyword=${keyword})}"
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                </div>
+    <div layout:fragment="content1">
+        <div class="col-md-6 offset-3">
+        <form method="post" th:action="@{save}">
+            <div>
+                <label for="nom">Nom</label>
+                <input id="nom" class="form-control" name="nom" th:value="${patient.nom}">
+                <span th:errors="${patient.nom}"></span>
             </div>
+            <div>
+                <label>Date Naissance</label>
+                <input class="form-control" type="date" name="dateNaissance" th:value="${patient.dateNaissance}">
+                <span th:errors="${patient.dateNaissance}"></span>
+            </div>
+            <div>
+                <label>Malade</label>
+                <input type="checkbox" name="malade" th:value="${patient.malade}">
+                <span th:errors="${patient.malade}"></span>
+            </div>
+            <div>
+                <label>Score</label>
+                <input class="form-control" name="score" th:value="${patient.score}">
+                <span th:errors="${patient.score}"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
         </div>
+    </div>
 </body>
 </html>
