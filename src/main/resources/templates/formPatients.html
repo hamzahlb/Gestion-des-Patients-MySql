@@ -14,7 +14,7 @@
             <div class="text-center">Ajouter un patients</div>
             <br>
             <br>
-            <form method="post" th:action="@{save}">
+            <form method="post" th:action="@{/admin/save}">
                 <div>
                     <label for="nom">Nom</label>
                     <input id="nom" class="form-control" name="nom" th:value="${patient.nom}">

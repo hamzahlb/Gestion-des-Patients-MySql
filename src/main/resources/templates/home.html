@@ -5,8 +5,7 @@
                 layout:decorate="template1">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <title>Index</title>
 </head>
 <body>
         <div layout:fragment="content1">
@@ -16,7 +15,7 @@
                     <br>
                         <div class="card-body text-center">
                             <div class="text-center">
-                                <form method="get" th:action="@{/user/index}">
+                                <form method="get" th:action="@{index}">
                                     <label class="h5">Keyword</label>
                                     <input type="text" name="keyword" th:value="${keyword}">
                                     <button type="submit" class="btn btn-primary">Chercher</button>
@@ -38,13 +37,13 @@
                                     <td th:text="${p.getScore()}"></td>
 
                                     <td sec:authorize="hasRole('ADMIN')">
-                                        <a class="btn btn-success" th:href="@{/admin/editPatients(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                                        <a class="btn btn-success" th:href="@{editPatients(id=${p.id},keyword=${keyword},page=${currentPage})}">
                                             Update
                                         </a>
                                     </td>
 
                                     <td sec:authorize="hasRole('ADMIN')">
-                                        <a onclick="return confirm('Etes vous sure ?')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                                        <a onclick="return confirm('Etes vous sure ?')" class="btn btn-danger" th:href="@{delete(id=${p.id},keyword=${keyword},page=${currentPage})}">
                                             Delete
                                         </a>
                                     </td>
@@ -56,7 +55,7 @@
                                 <li th:each="pages,status:${pages}">
                                     <a th:class="${status.index==currentPage?'btn btn-secondary ms-2 mt-2':'btn btn-outline-secondary ms-2 mt-2'}"
                                        th:text="${status.index}"
-                                       th:href="@{/user/index(page=${status.index},keyword=${keyword})}"
+                                       th:href="@{index(page=${status.index},keyword=${keyword})}"
                                     ></a>
                                 </li>
                             </ul>
