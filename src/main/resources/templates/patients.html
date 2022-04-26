@@ -12,6 +12,7 @@
             <div class="container mt-2">
                 <div class="card">
                     <div class="card-header text-center">Liste des patients</div>
+                    <br>
                         <div class="card-body text-center">
                             <div class="text-center">
                                 <form method="get" th:action="@{index}">
@@ -20,10 +21,11 @@
                                     <button type="submit" class="btn btn-primary">Chercher</button>
                                 </form>
                             </div>
+                            <br><br>
                             <table class="table">
                                 <thead class="text-center">
                                 <tr>
-                                    <th>Id</th><th>Nom</th><th>Date Naissance</th><th>Malade</th><th>Score</th><th>Action</th>
+                                    <th>Id</th><th>Nom</th><th>Date Naissance</th><th>Malade</th><th>Score</th><th>Update</th><th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -33,11 +35,19 @@
                                     <td th:text="${p.getDateNaissance()}"></td>
                                     <td th:text="${p.malade}"></td>
                                     <td th:text="${p.getScore()}"></td>
+
+                                    <td>
+                                        <a class="btn btn-success" th:href="@{editPatients(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                                            Update
+                                        </a>
+                                    </td>
+
                                     <td>
                                         <a onclick="return confirm('Etes vous sure ?')" class="btn btn-danger" th:href="@{delete(id=${p.id},keyword=${keyword},page=${currentPage})}">
                                             Delete
                                         </a>
                                     </td>
+
                                 </tr>
                                 </tbody>
                             </table>

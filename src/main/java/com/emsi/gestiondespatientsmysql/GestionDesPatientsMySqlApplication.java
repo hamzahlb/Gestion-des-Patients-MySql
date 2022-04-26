@@ -15,7 +15,7 @@ public class GestionDesPatientsMySqlApplication {
     public static void main(String[] args) {
         SpringApplication.run(GestionDesPatientsMySqlApplication.class, args);
     }
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(PatientRepository patientRepository){
         return args -> {
             patientRepository.save(new Patient(null,"Hamza",new Date(),false,12));
@@ -23,7 +23,7 @@ public class GestionDesPatientsMySqlApplication {
             patientRepository.save(new Patient(null,"Ilyass",new Date(),false,19));
             patientRepository.save(new Patient(null,"Aymane",new Date(),true,07));
             patientRepository.save(new Patient(null,"Mouade",new Date(),true,17));
-        patientRepository.findAll().forEach(p->{
+            patientRepository.findAll().forEach(p->{
             System.out.println(p.getNom());
                 });
         };
