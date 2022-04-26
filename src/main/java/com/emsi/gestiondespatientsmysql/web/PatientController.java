@@ -35,6 +35,7 @@ public class PatientController {
         return "patients";
     }
 
+
     @GetMapping(path="/admin/delete")
     public String delete(Long id,String keyword,int page){
         patientRepository.deleteById(id);
